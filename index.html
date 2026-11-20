@@ -4,107 +4,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <title>مدیریت شخصی | داشبورد</title>
 
-  <title>مدیریت شخصی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div>
-      <h1>مدیریت شخصی</h1>
-      <p>مرکز کنترل مالی و عادت‌های روزانه</p>
-    </div>
+  <div class="app-shell">
 
-    <div class="date" id="today"></div>
-  </header>
-
-  <main class="container">
-
-    <section class="welcome">
-      <h2>داشبورد اصلی</h2>
-      <p>ماژول مورد نظرت رو انتخاب کن.</p>
-    </section>
-
-    <section class="modules">
-
-      <button class="module-card" onclick="openModule('budget')">
-        <span class="module-icon">💰</span>
-        <h3>مدیریت بودجه</h3>
-        <p>حساب‌ها، درآمد، هزینه و موجودی</p>
-      </button>
-
-      <button class="module-card" onclick="openModule('smoking')">
-        <span class="module-icon">🚬</span>
-        <h3>مدیریت سیگار</h3>
-        <p>مصرف روزانه، هزینه و روند کاهش</p>
-      </button>
-
-      <button class="module-card" onclick="openModule('savings')">
-        <span class="module-icon">🐷</span>
-        <h3>مدیریت پس‌انداز</h3>
-        <p>هدف‌گذاری و پیگیری پس‌انداز</p>
-      </button>
-
-      <button class="module-card" onclick="openModule('currency')">
-        <span class="module-icon">💵</span>
-        <h3>تبدیل ارز</h3>
-        <p>تبدیل دلار با نرخ دلخواه</p>
-      </button>
-
-      <button class="module-card" onclick="openModule('reports')">
-        <span class="module-icon">📊</span>
-        <h3>گزارش و آمار</h3>
-        <p>نمودارها و تحلیل عملکرد</p>
-      </button>
-
-    </section>
-
-    <section class="total-dashboard">
-      <h2>📈 جمع‌بندی کل</h2>
-
-      <div class="total-grid">
-
-        <div class="total-item">
-          <span>مجموع درآمد</span>
-          <strong id="totalIncome">۰ تومان</strong>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">✦</div>
+        <div>
+          <h2>PERSONAL</h2>
+          <span>مدیریت هوشمند</span>
         </div>
-
-        <div class="total-item">
-          <span>مجموع هزینه</span>
-          <strong id="totalExpense">۰ تومان</strong>
-        </div>
-
-        <div class="total-item">
-          <span>موجودی نهایی</span>
-          <strong id="totalBalance">۰ تومان</strong>
-        </div>
-
       </div>
-    </section>
 
-    <section id="moduleContent" class="module-content" hidden>
+      <div class="sidebar-label">منوی اصلی</div>
 
-      <button class="back-button" onclick="closeModule()">
-        ← بازگشت به داشبورد
-      </button>
+      <nav class="nav-menu">
+        <button class="nav-item active" onclick="closeModule()">
+          <span class="nav-icon">⌂</span>
+          <span>داشبورد</span>
+        </button>
 
-      <div id="moduleBody"></div>
+        <button class="nav-item" onclick="openModule('budget')">
+          <span class="nav-icon">▦</span>
+          <span>مدیریت بودجه</span>
+        </button>
 
-    </section>
+        <button class="nav-item" onclick="openModule('smoking')">
+          <span class="nav-icon">◉</span>
+          <span>مدیریت سیگار</span>
+        </button>
 
-  </main>
+        <button class="nav-item" onclick="openModule('savings')">
+          <span class="nav-icon">◇</span>
+          <span>پس‌انداز</span>
+        </button>
 
-  <footer>
-    اطلاعات این برنامه روی همین مرورگر ذخیره می‌شود.
-  </footer>
+        <button class="nav-item" onclick="openModule('currency')">
+          <span class="nav-icon">＄</span>
+          <span>تبدیل ارز</span>
+        </button>
+
+        <button class="nav-item" onclick="openModule('reports')">
+          <span class="nav-icon">▥</span>
+          <span>گزارش‌ها و نمودارها</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          <span>ذخیره‌سازی محلی فعال</span>
+        </div>
+        <p>اطلاعات روی همین دستگاه ذخیره می‌شود.</p>
+      </div>
+    </aside>
+
+    <main class="main-area">
+
+      <header class="topbar">
+        <div>
+          <div class="topbar-greeting">خوش اومدی 👋</div>
+          <h1>داشبورد مالی</h1>
+          <p id="today">امروز</p>
+        </div>
+
+        <div class="topbar-right">
+          <div class="live-indicator">
+            <span class="status-dot"></span>
+            سیستم فعال
+          </div>
+          <div class="profile-avatar">م</div>
+        </div>
+      </header>
+
+      <section id="dashboard">
+
+        <div class="welcome-banner">
+          <div class="welcome-content">
+            <span class="banner-eyebrow">PERSONAL FINANCE OVERVIEW</span>
+            <h2>کنترل کامل امور مالی</h2>
+            <p>هزینه‌ها، بودجه‌ها و پس‌اندازت رو یک‌جا مدیریت کن.</p>
+          </div>
+          <div class="banner-decoration">✦</div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <h2>خلاصه وضعیت مالی</h2>
+            <p>نمای کلی حساب‌های بودجه‌ای</p>
+          </div>
+          <span class="section-tag">نمای کلی</span>
+        </div>
+
+        <div class="summary-grid">
+
+          <div class="summary-card income-card">
+            <div class="summary-top">
+              <span class="summary-icon">↗</span>
+              <span class="summary-caption">مجموع درآمد</span>
+            </div>
+            <div class="summary-value" id="totalIncome">۰</div>
+            <div class="summary-unit">تومان</div>
+            <div class="summary-decoration"></div>
+          </div>
+
+          <div class="summary-card expense-card">
+            <div class="summary-top">
+              <span class="summary-icon">↘</span>
+              <span class="summary-caption">مجموع هزینه‌ها</span>
+            </div>
+            <div class="summary-value" id="totalExpense">۰</div>
+            <div class="summary-unit">تومان</div>
+            <div class="summary-decoration"></div>
+          </div>
+
+          <div class="summary-card balance-card">
+            <div class="summary-top">
+              <span class="summary-icon">◈</span>
+              <span class="summary-caption">موجودی نهایی</span>
+            </div>
+            <div class="summary-value" id="totalBalance">۰</div>
+            <div class="summary-unit">تومان</div>
+            <div class="summary-decoration"></div>
+          </div>
+
+        </div>
+
+        <div class="section-heading modules-heading">
+          <div>
+            <h2>بخش‌های برنامه</h2>
+            <p>برای ورود به هر قسمت انتخابش کن</p>
+          </div>
+        </div>
+
+        <div class="modules-grid">
+
+          <button class="module-card module-budget" onclick="openModule('budget')">
+            <div class="module-card-top">
+              <span class="module-icon">▦</span>
+              <span class="module-arrow">↗</span>
+            </div>
+            <h3>مدیریت بودجه</h3>
+            <p>حساب‌ها، خریدها و کنترل هزینه‌های هفتگی</p>
+            <span class="module-link">ورود به بخش <span>←</span></span>
+          </button>
+
+          <button class="module-card module-smoking" onclick="openModule('smoking')">
+            <div class="module-card-top">
+              <span class="module-icon">◉</span>
+              <span class="module-arrow">↗</span>
+            </div>
+            <h3>مدیریت سیگار</h3>
+            <p>ثبت مصرف، هزینه هر نخ و مفت‌کشی</p>
+            <span class="module-link">ورود به بخش <span>←</span></span>
+          </button>
+
+          <button class="module-card module-savings" onclick="openModule('savings')">
+            <div class="module-card-top">
+              <span class="module-icon">◇</span>
+              <span class="module-arrow">↗</span>
+            </div>
+            <h3>پس‌انداز</h3>
+            <p>بررسی پس‌انداز مستقل هر حساب و روند رشد آن</p>
+            <span class="module-link">ورود به بخش <span>←</span></span>
+          </button>
+
+          <button class="module-card module-currency" onclick="openModule('currency')">
+            <div class="module-card-top">
+              <span class="module-icon">＄</span>
+              <span class="module-arrow">↗</span>
+            </div>
+            <h3>تبدیل ارز</h3>
+            <p>محاسبه هزینه‌ها و پس‌اندازها به دلار</p>
+            <span class="module-link">ورود به بخش <span>←</span></span>
+          </button>
+
+          <button class="module-card module-reports" onclick="openModule('reports')">
+            <div class="module-card-top">
+              <span class="module-icon">▥</span>
+              <span class="module-arrow">↗</span>
+            </div>
+            <h3>گزارش‌ها و نمودارها</h3>
+            <p>تحلیل عملکرد مالی و مقایسه هفته‌ها</p>
+            <span class="module-link">ورود به بخش <span>←</span></span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <section id="moduleContent" style="display:none;">
+        <div class="module-header">
+          <button class="back-button" onclick="closeModule()">
+            <span>→</span>
+            بازگشت به داشبورد
+          </button>
+        </div>
+        <div id="moduleBody"></div>
+      </section>
+
+      <footer class="app-footer">
+        <span>PERSONAL MANAGER</span>
+        <span>مدیریت بهتر، تصمیم‌های بهتر ✦</span>
+      </footer>
+
+    </main>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
