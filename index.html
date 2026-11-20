@@ -4,10 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مدیریت شخصی من</title>
+
+  <title>مدیریت شخصی</title>
+
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 </head>
+
 <body>
 
   <header class="topbar">
@@ -15,6 +22,7 @@
       <h1>مدیریت شخصی</h1>
       <p>مرکز کنترل مالی و عادت‌های روزانه</p>
     </div>
+
     <div class="date" id="today"></div>
   </header>
 
@@ -36,7 +44,7 @@
       <button class="module-card" onclick="openModule('smoking')">
         <span class="module-icon">🚬</span>
         <h3>مدیریت سیگار</h3>
-        <p>مصرف روزانه و هزینه سیگار</p>
+        <p>مصرف روزانه، هزینه و روند کاهش</p>
       </button>
 
       <button class="module-card" onclick="openModule('savings')">
@@ -54,32 +62,42 @@
       <button class="module-card" onclick="openModule('reports')">
         <span class="module-icon">📊</span>
         <h3>گزارش و آمار</h3>
-        <p>نمودارها و بررسی عملکرد</p>
+        <p>نمودارها و تحلیل عملکرد</p>
       </button>
 
     </section>
 
     <section class="total-dashboard">
       <h2>📈 جمع‌بندی کل</h2>
+
       <div class="total-grid">
+
         <div class="total-item">
           <span>مجموع درآمد</span>
           <strong id="totalIncome">۰ تومان</strong>
         </div>
+
         <div class="total-item">
           <span>مجموع هزینه</span>
           <strong id="totalExpense">۰ تومان</strong>
         </div>
+
         <div class="total-item">
           <span>موجودی نهایی</span>
           <strong id="totalBalance">۰ تومان</strong>
         </div>
+
       </div>
     </section>
 
     <section id="moduleContent" class="module-content" hidden>
-      <button class="back-button" onclick="closeModule()">← بازگشت</button>
+
+      <button class="back-button" onclick="closeModule()">
+        ← بازگشت به داشبورد
+      </button>
+
       <div id="moduleBody"></div>
+
     </section>
 
   </main>
@@ -88,6 +106,8 @@
     اطلاعات این برنامه روی همین مرورگر ذخیره می‌شود.
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
+
 </body>
 </html>
