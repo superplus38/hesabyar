@@ -1,217 +1,93 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حسابیار | مدیریت هزینه و مصرف</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مدیریت شخصی من</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="top">
+  <header class="topbar">
     <div>
-        <h1>حسابیار</h1>
-        <p>مدیریت هزینه‌ها، بودجه و مصرف سیگار</p>
+      <h1>مدیریت شخصی</h1>
+      <p>مرکز کنترل مالی و عادت‌های روزانه</p>
     </div>
+    <div class="date" id="today"></div>
+  </header>
 
-    <div class="auth">
-        <input id="email" type="email" placeholder="ایمیل">
-        <input id="password" type="password" placeholder="رمز عبور">
+  <main class="container">
 
-        <button id="signupBtn">ثبت‌نام</button>
-        <button id="loginBtn" class="secondary">ورود</button>
-        <button id="logoutBtn" class="secondary hidden">خروج</button>
-    </div>
-</header>
+    <section class="welcome">
+      <h2>داشبورد اصلی</h2>
+      <p>ماژول مورد نظرت رو انتخاب کن.</p>
+    </section>
 
-<main>
+    <section class="modules">
 
-<section class="notice" id="setupNotice">
-    برای ذخیره‌سازی ابری، اطلاعات Supabase را در فایل config.js وارد کن.
-    بدون آن هم اطلاعات روی دستگاه ذخیره می‌شوند.
-</section>
+      <button class="module-card" onclick="openModule('budget')">
+        <span class="module-icon">💰</span>
+        <h3>مدیریت بودجه</h3>
+        <p>حساب‌ها، درآمد، هزینه و موجودی</p>
+      </button>
 
-<section class="grid stats">
+      <button class="module-card" onclick="openModule('smoking')">
+        <span class="module-icon">🚬</span>
+        <h3>مدیریت سیگار</h3>
+        <p>مصرف روزانه و هزینه سیگار</p>
+      </button>
 
-    <article class="card">
-        <span>هزینه این هفته</span>
-        <strong id="weekSpent">۰ تومان</strong>
-    </article>
+      <button class="module-card" onclick="openModule('savings')">
+        <span class="module-icon">🐷</span>
+        <h3>مدیریت پس‌انداز</h3>
+        <p>هدف‌گذاری و پیگیری پس‌انداز</p>
+      </button>
 
-    <article class="card">
-        <span>بودجه باقی‌مانده</span>
-        <strong id="remaining">۰ تومان</strong>
-    </article>
+      <button class="module-card" onclick="openModule('currency')">
+        <span class="module-icon">💵</span>
+        <h3>تبدیل ارز</h3>
+        <p>تبدیل دلار با نرخ دلخواه</p>
+      </button>
 
-    <article class="card">
-        <span>هزینه سیگار</span>
-        <strong id="cigaretteCost">۰ تومان</strong>
-    </article>
+      <button class="module-card" onclick="openModule('reports')">
+        <span class="module-icon">📊</span>
+        <h3>گزارش و آمار</h3>
+        <p>نمودارها و بررسی عملکرد</p>
+      </button>
 
-    <article class="card">
-        <span>پس‌انداز تخمینی</span>
-        <strong id="saved">۰ تومان</strong>
-    </article>
+    </section>
 
-</section>
-
-<section class="grid two">
-
-    <article class="card">
-
-        <h2>تنظیم بودجه هفتگی</h2>
-
-        <label>
-            بودجه (تومان)
-            <input id="budget" type="number">
-        </label>
-
-        <button id="saveBudget">ذخیره بودجه</button>
-
-        <hr>
-
-        <h2>ثبت هزینه</h2>
-
-        <div class="formgrid">
-
-            <label>
-                عنوان
-                <input id="expenseTitle" placeholder="مثلاً خوراک">
-            </label>
-
-            <label>
-                مبلغ (تومان)
-                <input id="expenseAmount" type="number">
-            </label>
-
-            <label>
-                دسته‌بندی
-                <select id="expenseCategory">
-                    <option>خوراک</option>
-                    <option>رفت‌وآمد</option>
-                    <option>سیگار</option>
-                    <option>خرید</option>
-                    <option>قبض</option>
-                    <option>سایر</option>
-                </select>
-            </label>
-
-            <label>
-                تاریخ
-                <input id="expenseDate" type="date">
-            </label>
-
+    <section class="total-dashboard">
+      <h2>📈 جمع‌بندی کل</h2>
+      <div class="total-grid">
+        <div class="total-item">
+          <span>مجموع درآمد</span>
+          <strong id="totalIncome">۰ تومان</strong>
         </div>
-
-        <button id="addExpense">ثبت هزینه</button>
-
-    </article>
-
-    <article class="card">
-
-        <h2>محاسبه مصرف سیگار</h2>
-
-        <div class="formgrid">
-
-            <label>
-                تعداد نخ در روز
-                <input id="dailyCount" type="number" value="10">
-            </label>
-
-            <label>
-                قیمت هر پاکت
-                <input id="packPrice" type="number" value="50000">
-            </label>
-
-            <label>
-                تعداد نخ هر پاکت
-                <input id="sticksPerPack" type="number" value="20">
-            </label>
-
-            <label>
-                مصرف قبلی روزانه
-                <input id="baselineCount" type="number" value="15">
-            </label>
-
+        <div class="total-item">
+          <span>مجموع هزینه</span>
+          <strong id="totalExpense">۰ تومان</strong>
         </div>
-
-        <div class="result">
-            <span>هزینه روزانه فعلی</span>
-            <b id="dailyCost">۰ تومان</b>
+        <div class="total-item">
+          <span>موجودی نهایی</span>
+          <strong id="totalBalance">۰ تومان</strong>
         </div>
+      </div>
+    </section>
 
-        <div class="result">
-            <span>صرفه‌جویی روزانه</span>
-            <b id="dailySaving">۰ تومان</b>
-        </div>
+    <section id="moduleContent" class="module-content" hidden>
+      <button class="back-button" onclick="closeModule()">← بازگشت</button>
+      <div id="moduleBody"></div>
+    </section>
 
-        <div class="result">
-            <span>صرفه‌جویی ماهانه</span>
-            <b id="monthlySaving">۰ تومان</b>
-        </div>
+  </main>
 
-        <button id="saveSmoking">ذخیره تنظیمات مصرف</button>
+  <footer>
+    اطلاعات این برنامه روی همین مرورگر ذخیره می‌شود.
+  </footer>
 
-    </article>
-
-</section>
-
-<section class="grid two">
-
-    <article class="card">
-        <h2>ترکیب هزینه‌ها</h2>
-        <canvas id="categoryChart"></canvas>
-    </article>
-
-    <article class="card">
-        <h2>روند هزینه روزانه</h2>
-        <canvas id="trendChart"></canvas>
-    </article>
-
-</section>
-
-<section class="card">
-
-    <div class="row">
-        <h2>هزینه‌های ثبت‌شده</h2>
-        <button id="exportBtn" class="secondary">خروجی CSV</button>
-    </div>
-
-    <div class="tablewrap">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>تاریخ</th>
-                    <th>عنوان</th>
-                    <th>دسته</th>
-                    <th>مبلغ</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody id="expenseRows"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-<p class="foot" id="syncStatus">
-    اطلاعات فعلاً روی همین دستگاه ذخیره می‌شود.
-</p>
-
-</main>
-
-<script src="config.js"></script>
-<script src="app.js"></script>
-
+  <script src="app.js"></script>
 </body>
 </html>
